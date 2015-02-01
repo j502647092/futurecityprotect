@@ -1,0 +1,120 @@
+#本文件为保护插件的主配置文件
+
+#随机传送配置
+AllowTpr:
+  #是否开启
+  Enable: true
+
+#耕地保护配置 
+BreakFarm:
+  #是否开启
+  Enable: true
+
+#城市保护配置 
+CityBuild: 
+  #是否开启
+  Enable: true
+  #未圈地最大高度
+  MaxHeight: 100
+  #未圈地允许列表
+  AllowList: 
+    - 3 
+    - 2 
+    - 5 
+    - 54 
+    - 58 
+    - 61 
+    - 324 
+    - 17 
+    - 18 
+    - 31 
+    - 175 
+    - 161 
+    - 162
+
+#客户端检测配置(需配合专用开服务器)
+ClientCheck: 
+  Enable: false
+
+#爆炸保护配置 
+Explosion: 
+  #是否开启
+  Enable: true
+
+#高频红石检测
+HighRedstone: 
+  #是否开启
+  Enable: true
+  Maxevents: 35
+
+#超级跳床
+JumpBlock: 
+  #是否开启
+  Enable: true
+  BEDROCK: 10
+
+#玩家连杀提示
+Multikills: 
+  #是否开启
+  Enable: true
+
+#防止无限夜视
+Nightvision: 
+  #是否开启
+  Enable: true
+
+#自动端口转发
+PortMapping: 
+  #是否开启
+  Enable: true
+
+#允许领地飞行
+ResFly: 
+  #是否开启
+  Enable: true
+
+#随机传送配置
+RandomTP: 
+  #是否开启
+  Enable: true
+  #最大传送距离
+  Limit: 5000
+  #Xlimit: 3500
+  #Ylimit: 3500
+  #传送保护方块
+  ProtectBlock: 
+    - 8
+    - 9
+    - 10
+    - 11
+    - 81
+
+#安全地狱门
+SafeNetherDoor: 
+  #是否开启
+  Enable: true
+  World: world
+  X: -51
+  Y: 73
+  Z: 38
+
+#刷屏保护
+Spam: 
+  #是否开启
+  Enable: true
+  ChatWait: 3
+  SameChatWait: 8
+  CommandWait: 2
+  SameCommandWait: 3
+
+#大喇叭
+Speaker: 
+  #是否开启
+  Enable: true
+  Prefix: '&6[&d大喇叭&6] &c'
+  Time: 10  
+
+#登陆提示
+Tip: 
+  #是否开启
+  Enable: true

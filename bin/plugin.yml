@@ -1,0 +1,104 @@
+name: FutureCityProtect
+main: com.jtb.futurecityprotect.Main
+version: 1.7.8
+softdepend: [BarAPI,Residence,Vault]
+commands:
+  fcp:
+    description: 保护服务端检测客户端
+    usage: 使用/fcp help查看帮助!
+    permission: fcp.use
+    permission-message: §c你没有此命令的权限!
+  tpr:
+    description: 随机传送
+    usage: 使用/tpr [随机传送范围]!
+  spk:
+    description: Boss血条公告
+    usage: 使用/spk 公告内容!
+  jumpblock:
+    description: 跳板插件命令
+    usage: 使用/jumpblock set [基岩跳跃倍数] !
+  prefix:
+    description: 跳板插件命令
+    usage: 使用/prefix help 查看命令 !
+permissions: 
+  fcp.*: 
+    description: 允许使用所有命令!
+    default: op
+    children:
+      fcp.allow.*: true
+      fcp.ignore.*: true
+      fcp.use: true
+      tpr.use: true
+      spk.use: true
+      fcp.notice: true
+      jumpblock.use: true
+      jumpblock.create: true
+  prefix.*: 
+    description: 允许使用称号命令!
+    default: op
+    children:
+      prefix.list: true
+      prefix.add: true
+      prefix.del: true
+      prefix.set: true
+  prefix.list:
+    description: 允许查看称号!
+    default: true
+  prefix.set:
+    description: 允许设置称号!
+    default: true
+  jumpblock.use:
+    description: 允许使用跳板!
+    default: true
+  fcp.notice:
+    description: 允许接收到插件通知!
+    default: op
+  tpr.use:
+    description: 允许使用随机传送!
+    default: op
+  spk.use:
+    description: 允许使用Boss血条公告!
+    default: op
+  fcp.use: 
+    description: 允许使用所有命令!
+    default: op
+  fcp.ignore.*: 
+    description: 允许忽略插件的检测!
+    default: op
+    children:
+      fcp.ignore.resfly: true
+      fcp.ignore.spam: true
+      fcp.ignore.highredstone: true
+  fcp.ignore.spam: 
+    description: 允许忽略刷屏检测限制!
+    default: op
+  fcp.ignore.highredstone: 
+    description: 允许忽略高频检测限制!
+    default: op
+  fcp.ignore.resfly: 
+    description: 允许忽略领地飞行限制!
+    default: op
+  fcp.allow.*:
+    description: 允许被保护并阻止插件对玩家操作!
+    default: op
+    children:
+      fcp.allow.unsafeclient: true
+      fcp.allow.cheat: true
+      fcp.allow.noclient: true
+      fcp.allow.build: true
+      fcp.allow.nightvision: true
+  fcp.allow.unsafeclient:
+    default: op
+    description: 允许使用非官方客户端!
+  fcp.allow.nightvision:
+    default: op
+    description: 允许零亮度挖矿!
+  fcp.allow.build:
+    default: op
+    description: 允许城市世界建筑!
+  fcp.allow.cheat:
+    default: op
+    description: 允许作弊!
+  fcp.allow.noclient:
+    default: op
+    description: 允许客户端通讯中断!
