@@ -6,8 +6,9 @@ package com.jtb.futurecityprotect.Notice;
 
 import java.util.HashMap;
 
+import me.confuser.barapi.BarAPI;
+
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -104,23 +105,17 @@ public class Multikills implements Listener {
 		Player k = p.getKiller();
 		String inhandtype = k.getItemInHand().getType().name();
 		ItemStack IIH = k.getItemInHand();
-		String name = null;
-		if (IIH != null) {
-			if (IIH.getType() != Material.AIR) {
-				ItemMeta IM = IIH.getItemMeta();
-				name = IM.getDisplayName();
-			} else {
-				name = "爪子";
-			}
-		}
-		String inhandname = plugin.itemConfig.getString(inhandtype);// "ItemName."
+		ItemMeta IM = IIH.getItemMeta();
+		String inhandname = null;
 		String message = null;
+		if (IM.hasDisplayName()){
+			inhandname=IM.getDisplayName();
+		}else{
+			inhandname = plugin.itemConfig.getString(inhandtype);// "ItemName."
+		}
 		if (inhandname == null) {
 			inhandname = inhandtype;
 			plugin.itemConfig.set(inhandtype, inhandtype);
-		}
-		if (name != null) {
-			inhandname = name;
 		}
 		message = getmsg("Multikills.player", k, p, inhandname);
 		e.setDeathMessage(message);
@@ -134,14 +129,25 @@ public class Multikills implements Listener {
 			if (kills < 9) {
 				message = prefix + " "
 						+ getmsg("Multikills." + kills, k, v, null);
-				Bukkit.broadcastMessage(message);
+				sendmsg(message);
 			} else {
 				message = prefix + " " + getmsg("Multikills.more", k, v, null);
-				Bukkit.broadcastMessage(message);
+				sendmsg(message);
 			}
 		}
 	}
 
+	
+	public void sendmsg(String msg){
+		if (plugin.BossBar && plugin.getConfig().getBoolean("Multikills.BossBar")){
+			BarAPI.setMessage(msg, 5);
+		}else{
+			Bukkit.broadcastMessage(msg);
+		}
+	}
+	
+	
+	
 	public String getmsg(String path, Player k, Player v, String inhanditem) {
 		String message = plugin.getmessage(path);
 		if (k != null)

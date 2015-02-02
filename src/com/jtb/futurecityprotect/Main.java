@@ -31,6 +31,7 @@ public class Main extends JavaPlugin {
 	public File msgfile;
 	public FileConfiguration msgConfig;
 	public String servername;
+	public boolean BossBar;
 
 	public void onLoad() {
 		saveDefaultConfig();
@@ -47,6 +48,15 @@ public class Main extends JavaPlugin {
 			getDataFolder().mkdir();
 			getLogger().info("创建" + servername + "插件文件夹!");
 		}
+
+		PluginManager pm = Bukkit.getPluginManager();
+		Plugin p = pm.getPlugin("BarAPI");
+		if (p != null && p.isEnabled()) {
+			BossBar = true;
+		} else {
+			BossBar = false;
+		}
+
 		boolean ClientCheck = getConfig()
 				.getBoolean("ClientCheck.Enable", true);
 		if (ClientCheck) {
@@ -59,20 +69,12 @@ public class Main extends JavaPlugin {
 		}
 		getCommand("tpr").setExecutor(new Tpr(this));
 		boolean Speaker = getConfig().getBoolean("Speaker.Enable", true);
-		if (Speaker) {
-			PluginManager pm = Bukkit.getPluginManager();
-			Plugin p = pm.getPlugin("BarAPI");
-			if (p != null) {
-				if (!p.isEnabled()) {
-					pm.enablePlugin(p);
-				}
+		if (Speaker && BossBar) {
 				getLogger().info("BOSS血条公告模块已加载!");
 				getCommand("spk").setExecutor(new Spk(this));
 			} else {
 				getLogger().info("未找到BarAPI插件停止加载BOSS血条公告!");
-			}
 		}
-
 		if (getConfig().getBoolean("Tip.Enable", true)) {
 			Bukkit.getPluginManager().registerEvents(new Tip(this), this);
 			getLogger().info("保护插件提醒功能已加载!");
@@ -82,12 +84,7 @@ public class Main extends JavaPlugin {
 			getLogger().info("城市世界建筑保护已加载!");
 		}
 		if (getConfig().getBoolean("ResFly.Enable", true)) {
-			PluginManager pm = Bukkit.getPluginManager();
-			Plugin p = pm.getPlugin("Residence");
-			if (p != null) {
-				if (!p.isEnabled()) {
-					pm.enablePlugin(p);
-				}
+			if (p != null && p.isEnabled()) {
 				FlagPermissions.addFlag("fly");
 				FlagPermissions.addResidenceOnlyFlag("fly");
 				Bukkit.getPluginManager()
@@ -179,7 +176,7 @@ public class Main extends JavaPlugin {
 
 	public String Savecfg(FileConfiguration cfg, File cfgfile) {
 		try {
-			//cfg.saveToString();
+			// cfg.saveToString();
 			cfg.save(cfgfile);
 		} catch (IOException e) {
 		}
@@ -188,9 +185,9 @@ public class Main extends JavaPlugin {
 	}
 
 	public FileConfiguration GetPlayerConfig(String Player) {
-		File playerfile = new File(this.getDataFolder() + "/player",
-				Player + ".yml");
-		if (!playerfile.getParentFile().exists()){
+		File playerfile = new File(this.getDataFolder() + "/player", Player
+				+ ".yml");
+		if (!playerfile.getParentFile().exists()) {
 			playerfile.getParentFile().mkdirs();
 		}
 		if (!playerfile.exists()) {
@@ -204,10 +201,10 @@ public class Main extends JavaPlugin {
 		}
 	}
 
-	public void SavePlayerConfig(String Player,FileConfiguration pcfg) {
-		File playerfile = new File(this.getDataFolder() + "/player",
-				Player + ".yml");
-		if (!playerfile.getParentFile().exists()){
+	public void SavePlayerConfig(String Player, FileConfiguration pcfg) {
+		File playerfile = new File(this.getDataFolder() + "/player", Player
+				+ ".yml");
+		if (!playerfile.getParentFile().exists()) {
 			playerfile.getParentFile().mkdirs();
 		}
 		if (!playerfile.exists()) {
@@ -224,7 +221,7 @@ public class Main extends JavaPlugin {
 			return;
 		}
 	}
-	
+
 	public String getmessage(String path) {
 		return msgConfig.getString(path).replaceAll("&", "§");
 	}
