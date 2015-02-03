@@ -53,10 +53,10 @@ public class Main extends JavaPlugin {
 		Plugin p = pm.getPlugin("BarAPI");
 		if (p != null && p.isEnabled()) {
 			BossBar = true;
+			getLogger().info("发现BarAPI启用功能支持!");
 		} else {
 			BossBar = false;
 		}
-
 		boolean ClientCheck = getConfig()
 				.getBoolean("ClientCheck.Enable", true);
 		if (ClientCheck) {

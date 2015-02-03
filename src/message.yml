@@ -1,7 +1,10 @@
 servername: '&6[&b未&a来&e都&5市&6]&r'
 saveconfig: '&a配置文件 %filename% 保存完毕'
-createjumpblock: '&a您成功创建了一个跳板！'
 no-permission: '&c你没有此操作的权限！'
+
+jumpblock: 
+  create: '&a您成功创建了一个跳板！'
+
 Multikills: 
   prefix: '&6[&b连杀系统&6]&r'
   2: '&6玩家：&c%killer%&6击杀了&a%victim%&6完成了一次双杀！'
@@ -12,12 +15,16 @@ Multikills:
   7: '&6玩家：&c%killer%&6接近神了！'
   8: '&6玩家：&c%killer%&6已经超神了！'
   more: '&6玩家：&c%killer%&6已经超神了！'
+#连杀终结
   shutdown: '&6玩家：&a%victim%&5被&c%killer%&5终结了！'
+#玩家击杀
   player: '&6玩家：&a%victim%&6被&c%killer%&6用&b%itemname%&c杀死了！'
-  thorns: '&6玩家：&a%victim%&6在试图伤害&c%killer%&6时被&5荆棘甲&c反弹死了！'
+#给玩家击杀
+  thorns: '&6玩家：&a%victim%&6试图伤害&c%killer%&6时被&5荆棘&c反弹死了！'
   drown: '&6玩家：&a%victim%&5貌似不会游泳&6--&c淹死了'
   starve: '&6玩家：&a%victim%&5忘记吃东西&6--&c饿死了'
   suffocate: '&6玩家：&a%victim%&5被方块活埋&6--&c窒息死了'
   suicide: '&6玩家：&a%victim%&5活不下去了&6--&c自杀了'
   firetick: '&6玩家：&a%victim%&5不小心着火了&6--&c烧死了'
   fall: '&6玩家：&a%victim%&5从高处掉落&6--&c摔死了'
+  lava: '&6玩家：&a%victim%&5试图在岩浆里游泳&6--&c烧死了'

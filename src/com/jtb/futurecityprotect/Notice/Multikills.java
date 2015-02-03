@@ -55,7 +55,7 @@ public class Multikills implements Listener {
 		switch (p.getLastDamageCause().getCause()) {
 		case ENTITY_ATTACK:
 			if (gk instanceof Player) {
-				resetmsg(e, (Player) gk, p);
+				message = resetmsg(e, (Player) gk, p);
 			}
 			break;
 		case PROJECTILE:
@@ -65,52 +65,55 @@ public class Multikills implements Listener {
 				Entity damager = kie.getDamager();
 				Projectile pro = (Projectile) damager;
 				if (pro.getShooter() instanceof Player) {
-					resetmsg(e, (Player) pro.getShooter(), p);
+					message = resetmsg(e, (Player) pro.getShooter(), p);
 				}
 			}
 			break;
 		case DROWNING:
 			message = getmsg("Multikills.drown", null, p, null);
-			e.setDeathMessage(message);
 			break;
 		case STARVATION:
 			message = getmsg("Multikills.starve", null, p, null);
-			e.setDeathMessage(message);
 			break;
 		case SUFFOCATION:
 			message = getmsg("Multikills.suffocate", null, p, null);
-			e.setDeathMessage(message);
 			break;
 		case SUICIDE:
 			message = getmsg("Multikills.suicide", null, p, null);
-			e.setDeathMessage(message);
 			break;
 		case FIRE_TICK:
 			message = getmsg("Multikills.firetick", null, p, null);
-			e.setDeathMessage(message);
 			break;
 		case FALL:
 			message = getmsg("Multikills.fall", null, p, null);
-			e.setDeathMessage(message);
+			break;
+		case LAVA:
+			message = getmsg("Multikills.lava", null, p, null);
+			break;
+		case WITHER:
+			break;
+		case ENTITY_EXPLOSION:
+			break;
+		case LIGHTNING:
 			break;
 		case THORNS:
 			message = getmsg("Multikills.thorns", (Player) gk, p, null);
-			e.setDeathMessage(message);
 			multikill((Player) gk, p);
 			break;
 		}
+		e.setDeathMessage(message);
 	}
 
-	public void resetmsg(PlayerDeathEvent e, Player gk, Player p) {
+	public String resetmsg(PlayerDeathEvent e, Player gk, Player p) {
 		Player k = p.getKiller();
 		String inhandtype = k.getItemInHand().getType().name();
 		ItemStack IIH = k.getItemInHand();
 		ItemMeta IM = IIH.getItemMeta();
 		String inhandname = null;
 		String message = null;
-		if (IM.hasDisplayName()){
-			inhandname=IM.getDisplayName();
-		}else{
+		if (IM.hasDisplayName()) {
+			inhandname = IM.getDisplayName();
+		} else {
 			inhandname = plugin.itemConfig.getString(inhandtype);// "ItemName."
 		}
 		if (inhandname == null) {
@@ -118,8 +121,8 @@ public class Multikills implements Listener {
 			plugin.itemConfig.set(inhandtype, inhandtype);
 		}
 		message = getmsg("Multikills.player", k, p, inhandname);
-		e.setDeathMessage(message);
 		multikill(k, p);
+		return message;
 	}
 
 	public void multikill(Player k, Player v) {
@@ -137,23 +140,23 @@ public class Multikills implements Listener {
 		}
 	}
 
-	
-	public void sendmsg(String msg){
-		if (plugin.BossBar && plugin.getConfig().getBoolean("Multikills.BossBar")){
+	public void sendmsg(String msg) {
+		if (plugin.BossBar
+				&& plugin.getConfig().getBoolean("Multikills.BossBar")) {
 			BarAPI.setMessage(msg, 5);
-		}else{
+		} else {
 			Bukkit.broadcastMessage(msg);
 		}
 	}
-	
-	
-	
+
 	public String getmsg(String path, Player k, Player v, String inhanditem) {
 		String message = plugin.getmessage(path);
 		if (k != null)
-			message = message.replace("%killer%", " " + k.getDisplayName() + " ");
+			message = message.replace("%killer%", " " + k.getDisplayName()
+					+ " ");
 		if (v != null)
-			message = message.replace("%victim%", " " + v.getDisplayName() + " ");
+			message = message.replace("%victim%", " " + v.getDisplayName()
+					+ " ");
 		if (inhanditem != null)
 			message = message.replace("%itemname%", " " + inhanditem + " ");
 		return message;
