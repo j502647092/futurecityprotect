@@ -2,6 +2,7 @@ package com.jtb.futurecityprotect.Protect;
 
 import java.util.HashMap;
 
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -46,7 +47,8 @@ public class ResFly implements Listener {
 				if (p == fall.get(p)) {
 					fall.remove(p);
 					e.setCancelled(true);
-					p.sendMessage(plugin.servername + "§6[§4保护系统§6]  §a飞行保护，摔落取消！");
+					p.sendMessage(plugin.servername
+							+ "§6[§4保护系统§6]  §a飞行保护，摔落取消！");
 				}
 			}
 		}
@@ -70,7 +72,8 @@ public class ResFly implements Listener {
 	}
 
 	boolean permCheck(Player p) {
-		if (p.hasPermission("fcp.ignore.resfly") || p.isOp()) {
+		if (p.hasPermission("fcp.ignore.resfly") || p.isOp()
+				|| p.getGameMode() == GameMode.CREATIVE) {
 			return false;
 		}
 		return true;

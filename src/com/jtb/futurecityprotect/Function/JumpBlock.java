@@ -91,9 +91,22 @@ public class JumpBlock implements Listener, CommandExecutor {
 			Player p = (Player) e.getEntity();
 			if (e.getCause() == DamageCause.FALL) {
 				if (p == fall.get(p)) {
-					fall.remove(p);
+					Location gb = p.getLocation();
+					Block loc = gb.add(0.0D, -1.0D, 0.0D).getBlock();
+					Block loc_1 = gb.add(0.0D, -1.0D, 0.0D).getBlock();
+					Block loc_2 = gb.add(0.0D, -1.0D, 0.0D).getBlock();
+					if (!(loc_1.getType() == Material.GLASS
+							&& loc_2.getType() == Material.LAPIS_BLOCK && (loc
+							.getType() == Material.IRON_BLOCK
+							|| loc.getType() == Material.GOLD_BLOCK
+							|| loc.getType() == Material.DIAMOND_BLOCK
+							|| loc.getType() == Material.EMERALD_BLOCK || loc
+								.getType() == Material.BEDROCK))) {
+						fall.remove(p);
+					}
 					e.setCancelled(true);
-					//p.sendMessage(plugin.servername + "§6[§4保护系统§6]  §a跳板保护，摔落取消！");
+					// p.sendMessage(plugin.servername +
+					// "§6[§4保护系统§6]  §a跳板保护，摔落取消！");
 				}
 			}
 		}

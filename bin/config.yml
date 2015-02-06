@@ -57,7 +57,7 @@ JumpBlock:
 Multikills: 
   #是否开启
   Enable: true
-  BossBar: true
+  BossBar: false
 
 #防止无限夜视
 Nightvision: 
@@ -107,6 +107,7 @@ Spam:
   SameChatWait: 8
   CommandWait: 2
   SameCommandWait: 3
+  KickCheck: 3
 
 #大喇叭
 Speaker: 

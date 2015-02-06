@@ -18,8 +18,11 @@ commands:
     description: 跳板插件命令
     usage: 使用/jumpblock set [基岩跳跃倍数] !
   prefix:
-    description: 跳板插件命令
+    description: 称号插件命令
     usage: 使用/prefix help 查看命令 !
+  spam: 
+    description: 聊天管理命令
+    usage: 使用/spam help 查看命令!
 permissions: 
   fcp.*: 
     description: 允许使用所有命令!

@@ -123,7 +123,10 @@ public class Main extends JavaPlugin {
 			getLogger().info("防止登录卡地狱门已加载!");
 		}
 		if (getConfig().getBoolean("Spam.Enable", true)) {
-			Bukkit.getPluginManager().registerEvents(new Spam(this), this);
+			Spam spam = new Spam(this);
+			Bukkit.getPluginManager().registerEvents(spam, this);
+			Bukkit.getScheduler().runTaskTimer(this, spam, 50, 50);
+			getCommand("spam").setExecutor(spam);
 			getLogger().info("防止玩家聊天刷屏已加载!");
 		}
 		if (getConfig().getBoolean("BreakFarm.Enable", true)) {

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import me.confuser.barapi.BarAPI;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -170,19 +171,24 @@ public class Multikills implements Listener {
 
 	public String resetmsg(PlayerDeathEvent e, Player gk, Player p) {
 		Player k = p.getKiller();
-		String inhandtype = k.getItemInHand().getType().name();
-		ItemStack IIH = k.getItemInHand();
-		ItemMeta IM = IIH.getItemMeta();
 		String inhandname = null;
 		String message = null;
-		if (IM.hasDisplayName()) {
-			inhandname = IM.getDisplayName();
-		} else {
-			inhandname = plugin.itemConfig.getString(inhandtype);// "ItemName."
-		}
-		if (inhandname == null) {
-			inhandname = inhandtype;
-			plugin.itemConfig.set(inhandtype, inhandtype);
+		ItemStack IIH = k.getItemInHand();
+		String inhandtype = IIH.getType().name();
+		if (IIH != null) {
+			ItemMeta IM = IIH.getItemMeta();
+			if (IIH.getType() != Material.AIR) {
+				if (IM.hasDisplayName()) {
+					inhandname = IM.getDisplayName();
+				}
+			}
+			if (inhandname == null) {
+				inhandname = plugin.itemConfig.getString(inhandtype);// "ItemName."
+			}
+			if (inhandname == null) {
+				inhandname = inhandtype;
+				plugin.itemConfig.set(inhandtype, inhandtype);
+			}
 		}
 		message = getmsg("player", k, p, inhandname);
 		multikill(k, p);

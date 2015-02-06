@@ -20,27 +20,6 @@ public class Fcp implements CommandExecutor {
 
 	public boolean onCommand(CommandSender sender, Command cmd, String string,
 			String[] args) {
-		if (cmd.getName().equalsIgnoreCase("prefix")) {
-			if (args.length == 2) {
-				Player p = Bukkit.getServer().getPlayer(args[0]);
-				if (p == null) {
-					sender.sendMessage("当前玩家不在线！");
-					return true;
-				}
-				String name = p.getName();
-				String ctags = "ctags player " + name + " " + args[1];
-				String manuaddv = "manuaddv " + name + " prefix " + args[1];
-				Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
-						ctags.replaceAll("&", "§"));
-				Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
-						manuaddv.replaceAll("&", "§"));
-				sender.sendMessage("§6玩家：§a " + name + " §6的称号已修改为 §r"
-						+ args[1].replaceAll("&", "§"));
-				return true;
-			}
-			sender.sendMessage("/prefix 玩家名称 玩家称号        设置玩家列表和聊天称号");
-			return true;
-		}
 		if (cmd.getName().equalsIgnoreCase("fcp")) {
 			if (args.length == 0) {
 				sender.sendMessage("§c========== " + plugin.servername
@@ -118,7 +97,6 @@ public class Fcp implements CommandExecutor {
 				sender.sendMessage("/fcp prefix 玩家名称 玩家称号        设置玩家列表和聊天称号");
 				return true;
 			}
-
 			if (args[0].equalsIgnoreCase("kick")) {
 				if (args.length == 2) {
 					if (args[1].equalsIgnoreCase("on")) {
