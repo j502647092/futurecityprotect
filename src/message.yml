@@ -7,24 +7,52 @@ jumpblock:
 
 Multikills: 
   prefix: '&6[&b连杀系统&6]&r'
-  2: '&6玩家：&c%killer%&6击杀了&a%victim%&6完成了一次双杀！'
-  3: '&6玩家：&c%killer%&6正在大杀特杀！'
-  4: '&6玩家：&c%killer%&6已经接近暴走了！'
-  5: '&6玩家：&c%killer%&6已经主宰战场了！'
-  6: '&6玩家：&c%killer%&6已经无人能挡了！'
-  7: '&6玩家：&c%killer%&6接近神了！'
-  8: '&6玩家：&c%killer%&6已经超神了！'
-  more: '&6玩家：&c%killer%&6已经超神了！'
+  2kills: '&6玩家：&c%killer%&6击杀了&a%victim%&6完成了一次双杀！'
+  3kills: '&6玩家：&c%killer%&6正在大杀特杀！'
+  4kills: '&6玩家：&c%killer%&6已经接近暴走了！'
+  5kills: '&6玩家：&c%killer%&6已经主宰战场了！'
+  6kills: '&6玩家：&c%killer%&6已经无人能挡了！'
+  7kills: '&6玩家：&c%killer%&6接近神了！'
+  8kills: '&6玩家：&c%killer%&6已经超神了！'
+  morekills: '&6玩家：&c%killer%&6已经超神了！'
 #连杀终结
   shutdown: '&6玩家：&a%victim%&5被&c%killer%&5终结了！'
 #玩家击杀
   player: '&6玩家：&a%victim%&6被&c%killer%&6用&b%itemname%&c杀死了！'
-#给玩家击杀
+#反弹击杀
   thorns: '&6玩家：&a%victim%&6试图伤害&c%killer%&6时被&5荆棘&c反弹死了！'
+#水淹死
   drown: '&6玩家：&a%victim%&5貌似不会游泳&6--&c淹死了'
-  starve: '&6玩家：&a%victim%&5忘记吃东西&6--&c饿死了'
+#饿死
+  hunger: '&6玩家：&a%victim%&5忘记吃东西&6--&c饿死了'
+#方块掩埋
   suffocate: '&6玩家：&a%victim%&5被方块活埋&6--&c窒息死了'
+#自杀
   suicide: '&6玩家：&a%victim%&5活不下去了&6--&c自杀了'
+#火烧死
   firetick: '&6玩家：&a%victim%&5不小心着火了&6--&c烧死了'
+#高处摔落
   fall: '&6玩家：&a%victim%&5从高处掉落&6--&c摔死了'
+#岩浆
   lava: '&6玩家：&a%victim%&5试图在岩浆里游泳&6--&c烧死了'
+#苦力怕
+  creeper: '&6玩家：&a%victim%&5和苦力怕娘激情拥抱&6--&c炸死了'
+#凋零状态
+  witherstate: '&6玩家：&a%victim%&5与凋零骷髅亲吻&6--&c凋零了'
+#小白骷髅
+  skeleton: '&6玩家：&a%victim%&5与小白骷髅对射&6--&c被爆头了'
+#雷电
+  lighting: '&6玩家：&a%victim%&5貌似运气不是很好&6--&c被雷劈死了'
+#生物击杀
+  zombie: '&6玩家：&a%victim%&5被僵尸吃掉了脑袋&6--&c死了'
+  enderman: '&6玩家：&a%victim%&5被末影人带到末地去&6--&c晕死了'
+  spider: '&6玩家：&a%victim%&5被蜘蛛包成了粽子&6--&c吃掉了'
+  witherskull: '&6玩家：&a%victim%&5被凋零骷髅追杀&6--&c凋零了'
+  slime: '&6玩家：&a%victim%&5被史莱姆一屁股坐下&6--&c压死了'
+  lavaslime: '&6玩家：&a%victim%&5被岩浆怪黏住&6--&c玩死了'
+  giant: '&6玩家：&a%victim%&5被巨人&6--&c炸死了'
+  pigzombie: '&6玩家：&a%victim%&5被僵尸猪人追杀&6--&c砍死了'
+  wolf: '&6玩家：&a%victim%&5和狼抢吃的&6--&c被狼咬死了'
+  blaze: '&6玩家：&a%victim%&5去抢烈焰人的棒子&6--&c被烧死了'
+  wither: '&6玩家：&a%victim%&5被凋零BOSS追杀&6--&c摁死了'
+  ghast: '&6玩家：&a%victim%&5被恶魂疯狂的吐火球&6--&c炸死了'

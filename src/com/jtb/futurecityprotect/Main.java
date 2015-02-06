@@ -3,12 +3,15 @@ package com.jtb.futurecityprotect;
 import java.io.File;
 import java.io.IOException;
 
+import net.milkbowl.vault.economy.Economy;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.bekvon.bukkit.residence.protection.FlagPermissions;
@@ -32,6 +35,7 @@ public class Main extends JavaPlugin {
 	public FileConfiguration msgConfig;
 	public String servername;
 	public boolean BossBar;
+	public static Economy economy = null;
 
 	public void onLoad() {
 		saveDefaultConfig();
@@ -57,6 +61,11 @@ public class Main extends JavaPlugin {
 		} else {
 			BossBar = false;
 		}
+		if (!setupEconomy()){
+			getLogger().info("未发现Vault经济插件，可能无法使用部分功能!");
+		} else {
+			getLogger().info("已发现Vault经济插件，启用经济功能部分支持!");
+		}
 		boolean ClientCheck = getConfig()
 				.getBoolean("ClientCheck.Enable", true);
 		if (ClientCheck) {
@@ -70,10 +79,10 @@ public class Main extends JavaPlugin {
 		getCommand("tpr").setExecutor(new Tpr(this));
 		boolean Speaker = getConfig().getBoolean("Speaker.Enable", true);
 		if (Speaker && BossBar) {
-				getLogger().info("BOSS血条公告模块已加载!");
-				getCommand("spk").setExecutor(new Spk(this));
-			} else {
-				getLogger().info("未找到BarAPI插件停止加载BOSS血条公告!");
+			getLogger().info("BOSS血条公告模块已加载!");
+			getCommand("spk").setExecutor(new Spk(this));
+		} else {
+			getLogger().info("未找到BarAPI插件停止加载BOSS血条公告!");
 		}
 		if (getConfig().getBoolean("Tip.Enable", true)) {
 			Bukkit.getPluginManager().registerEvents(new Tip(this), this);
@@ -224,6 +233,16 @@ public class Main extends JavaPlugin {
 
 	public String getmessage(String path) {
 		return msgConfig.getString(path).replaceAll("&", "§");
+	}
+
+	public boolean setupEconomy() {
+		RegisteredServiceProvider<Economy> economyProvider = getServer()
+				.getServicesManager().getRegistration(
+						net.milkbowl.vault.economy.Economy.class);
+		if (economyProvider != null) {
+			economy = economyProvider.getProvider();
+		}
+		return (economy != null);
 	}
 
 }

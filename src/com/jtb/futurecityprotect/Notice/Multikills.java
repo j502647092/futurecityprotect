@@ -9,9 +9,7 @@ import java.util.HashMap;
 import me.confuser.barapi.BarAPI;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -39,14 +37,14 @@ public class Multikills implements Listener {
 	@EventHandler
 	public void onDeath(PlayerDeathEvent e) {
 		Player p = e.getEntity();
+		EntityDamageEvent ki = p.getLastDamageCause();
 		Entity gk = p.getKiller();
 		prefix = plugin.getmessage("Multikills.prefix");
 		String message = null;
 		if (gk instanceof Player) {
 			if (kill.containsKey(p)) {
 				if (kill.get(p) > 2) {
-					message = getmsg("Multikills.shutdown", (Player) gk, p,
-							null);
+					message = getmsg("shutdown", (Player) gk, p, null);
 					Bukkit.broadcastMessage(message);
 				}
 				kill.remove(p);
@@ -56,10 +54,65 @@ public class Multikills implements Listener {
 		case ENTITY_ATTACK:
 			if (gk instanceof Player) {
 				message = resetmsg(e, (Player) gk, p);
+				break;
+			}
+			if (ki instanceof EntityDamageByEntityEvent) {
+				EntityDamageByEntityEvent kie = (EntityDamageByEntityEvent) ki;
+				gk = kie.getDamager();
+			}
+			if (gk instanceof Creeper) {
+				message = getmsg("creeper", null, p, null);
+			}
+			if (gk instanceof Zombie) {
+				message = getmsg("zombie", null, p, null);
+			}
+			if (gk instanceof Spider) {
+				message = getmsg("spider", null, p, null);
+			}
+			if (gk instanceof CaveSpider) {
+				message = getmsg("spider", null, p, null);
+			}
+			if (gk instanceof Enderman) {
+				message = getmsg("enderman", null, p, null);
+			}
+			if (gk instanceof Silverfish) {
+				message = getmsg("silverfish", null, p, null);
+			}
+			if (gk instanceof MagmaCube) {
+				message = getmsg("lavaslime", null, p, null);
+			}
+			if (gk instanceof Slime) {
+				message = getmsg("slime", null, p, null);
+			}
+			if (gk instanceof WitherSkull) {
+				message = getmsg("witherskull", null, p, null);
+			}
+			if (gk instanceof Skeleton) {
+				message = getmsg("skeleton", null, p, null);
+			}
+			if (gk instanceof Wolf) {
+				message = getmsg("wolf", null, p, null);
+			}
+			if (gk instanceof PigZombie) {
+				message = getmsg("pigzombie", null, p, null);
+			}
+			if (gk instanceof IronGolem) {
+				message = getmsg("irongolem", null, p, null);
+			}
+			if (gk instanceof Giant) {
+				message = getmsg("giant", null, p, null);
+			}
+			if (gk instanceof Wither) {
+				message = getmsg("wither", null, p, null);
+			}
+			if (gk instanceof Blaze) {
+				message = getmsg("blaze", null, p, null);
+			}
+			if (gk instanceof Ghast) {
+				message = getmsg("ghast", null, p, null);
 			}
 			break;
 		case PROJECTILE:
-			EntityDamageEvent ki = p.getLastDamageCause();
 			if (ki instanceof EntityDamageByEntityEvent) {
 				EntityDamageByEntityEvent kie = (EntityDamageByEntityEvent) ki;
 				Entity damager = kie.getDamager();
@@ -67,41 +120,52 @@ public class Multikills implements Listener {
 				if (pro.getShooter() instanceof Player) {
 					message = resetmsg(e, (Player) pro.getShooter(), p);
 				}
+				if (pro.getShooter() instanceof Skeleton) {
+					message = getmsg("skeleton", null, p, null);
+				}
+				if (damager instanceof Ghast
+						|| pro.getShooter() instanceof Ghast) {
+					message = getmsg("ghast", null, p, null);
+				}
 			}
 			break;
 		case DROWNING:
-			message = getmsg("Multikills.drown", null, p, null);
+			message = getmsg("drown", null, p, null);
 			break;
 		case STARVATION:
-			message = getmsg("Multikills.starve", null, p, null);
+			message = getmsg("hunger", null, p, null);
 			break;
 		case SUFFOCATION:
-			message = getmsg("Multikills.suffocate", null, p, null);
+			message = getmsg("suffocate", null, p, null);
 			break;
 		case SUICIDE:
-			message = getmsg("Multikills.suicide", null, p, null);
+			message = getmsg("suicide", null, p, null);
 			break;
 		case FIRE_TICK:
-			message = getmsg("Multikills.firetick", null, p, null);
+			message = getmsg("firetick", null, p, null);
 			break;
 		case FALL:
-			message = getmsg("Multikills.fall", null, p, null);
+			message = getmsg("fall", null, p, null);
 			break;
 		case LAVA:
-			message = getmsg("Multikills.lava", null, p, null);
+			message = getmsg("lava", null, p, null);
 			break;
 		case WITHER:
+			message = getmsg("witherstate", null, p, null);
 			break;
 		case ENTITY_EXPLOSION:
+			message = getmsg("creeper", null, p, null);
 			break;
 		case LIGHTNING:
+			message = getmsg("lighting", null, p, null);
 			break;
 		case THORNS:
-			message = getmsg("Multikills.thorns", (Player) gk, p, null);
+			message = getmsg("thorns", (Player) gk, p, null);
 			multikill((Player) gk, p);
 			break;
 		}
-		e.setDeathMessage(message);
+		if (message != null)
+			e.setDeathMessage(message);
 	}
 
 	public String resetmsg(PlayerDeathEvent e, Player gk, Player p) {
@@ -120,7 +184,7 @@ public class Multikills implements Listener {
 			inhandname = inhandtype;
 			plugin.itemConfig.set(inhandtype, inhandtype);
 		}
-		message = getmsg("Multikills.player", k, p, inhandname);
+		message = getmsg("player", k, p, inhandname);
 		multikill(k, p);
 		return message;
 	}
@@ -130,11 +194,10 @@ public class Multikills implements Listener {
 		String message = null;
 		if (kills > 1) {
 			if (kills < 9) {
-				message = prefix + " "
-						+ getmsg("Multikills." + kills, k, v, null);
+				message = prefix + " " + getmsg(kills + "kills", k, v, null);
 				sendmsg(message);
 			} else {
-				message = prefix + " " + getmsg("Multikills.more", k, v, null);
+				message = prefix + " " + getmsg("morekills", k, v, null);
 				sendmsg(message);
 			}
 		}
@@ -149,8 +212,8 @@ public class Multikills implements Listener {
 		}
 	}
 
-	public String getmsg(String path, Player k, Player v, String inhanditem) {
-		String message = plugin.getmessage(path);
+	public String getmsg(String type, Player k, Player v, String inhanditem) {
+		String message = plugin.getmessage("Multikills." + type);
 		if (k != null)
 			message = message.replace("%killer%", " " + k.getDisplayName()
 					+ " ");
