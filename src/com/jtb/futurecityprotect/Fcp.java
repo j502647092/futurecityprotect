@@ -1,11 +1,15 @@
 package com.jtb.futurecityprotect;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
 import com.jtb.futurecityprotect.Main;
 
@@ -51,7 +55,12 @@ public class Fcp implements CommandExecutor {
 				}
 			}
 			if (args[0].equalsIgnoreCase("reload")) {
-				plugin.Reload(sender);
+				try {
+					plugin.Reload(sender);
+				} catch (FileNotFoundException e) {
+				} catch (IOException e) {
+				} catch (InvalidConfigurationException e) {
+				}
 				return true;
 			}
 			if (args[0].equalsIgnoreCase("save")) {
@@ -77,6 +86,10 @@ public class Fcp implements CommandExecutor {
 				return true;
 			}
 			if (args[0].equalsIgnoreCase("prefix")) {
+				if (!sender.hasPermission("prefix.add")){
+					sender.sendMessage(plugin.servername + " " + plugin.getmessage("no-permission"));
+					return true;
+				}
 				if (args.length == 3) {
 					Player p = Bukkit.getServer().getPlayer(args[1]);
 					if (p == null) {

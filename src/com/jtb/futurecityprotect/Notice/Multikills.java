@@ -40,6 +40,7 @@ public class Multikills implements Listener {
 		Player p = e.getEntity();
 		EntityDamageEvent ki = p.getLastDamageCause();
 		Entity gk = p.getKiller();
+		// Entity Ek = p.getKiller();
 		prefix = plugin.getmessage("Multikills.prefix");
 		String message = null;
 		if (gk instanceof Player) {
@@ -63,54 +64,75 @@ public class Multikills implements Listener {
 			}
 			if (gk instanceof Creeper) {
 				message = getmsg("creeper", null, p, null);
+				break;
 			}
 			if (gk instanceof Zombie) {
 				message = getmsg("zombie", null, p, null);
+				break;
 			}
 			if (gk instanceof Spider) {
 				message = getmsg("spider", null, p, null);
+				break;
 			}
 			if (gk instanceof CaveSpider) {
 				message = getmsg("spider", null, p, null);
+				break;
 			}
 			if (gk instanceof Enderman) {
 				message = getmsg("enderman", null, p, null);
+				break;
 			}
 			if (gk instanceof Silverfish) {
 				message = getmsg("silverfish", null, p, null);
+				break;
 			}
 			if (gk instanceof MagmaCube) {
 				message = getmsg("lavaslime", null, p, null);
+				break;
 			}
 			if (gk instanceof Slime) {
 				message = getmsg("slime", null, p, null);
+				break;
 			}
 			if (gk instanceof WitherSkull) {
 				message = getmsg("witherskull", null, p, null);
+				break;
 			}
 			if (gk instanceof Skeleton) {
 				message = getmsg("skeleton", null, p, null);
+				break;
 			}
 			if (gk instanceof Wolf) {
 				message = getmsg("wolf", null, p, null);
+				break;
 			}
 			if (gk instanceof PigZombie) {
 				message = getmsg("pigzombie", null, p, null);
+				break;
 			}
 			if (gk instanceof IronGolem) {
 				message = getmsg("irongolem", null, p, null);
+				break;
 			}
 			if (gk instanceof Giant) {
 				message = getmsg("giant", null, p, null);
+				break;
 			}
 			if (gk instanceof Wither) {
 				message = getmsg("wither", null, p, null);
+				break;
 			}
 			if (gk instanceof Blaze) {
 				message = getmsg("blaze", null, p, null);
+				break;
 			}
 			if (gk instanceof Ghast) {
 				message = getmsg("ghast", null, p, null);
+				break;
+			}
+			if (gk instanceof EnderDragon) {
+				message = getmsg("enderdragon", null, p, null);
+				break;
 			}
 			break;
 		case PROJECTILE:
@@ -120,13 +142,16 @@ public class Multikills implements Listener {
 				Projectile pro = (Projectile) damager;
 				if (pro.getShooter() instanceof Player) {
 					message = resetmsg(e, (Player) pro.getShooter(), p);
+					break;
 				}
 				if (pro.getShooter() instanceof Skeleton) {
 					message = getmsg("skeleton", null, p, null);
+					break;
 				}
 				if (damager instanceof Ghast
 						|| pro.getShooter() instanceof Ghast) {
 					message = getmsg("ghast", null, p, null);
+					break;
 				}
 			}
 			break;
@@ -155,7 +180,18 @@ public class Multikills implements Listener {
 			message = getmsg("witherstate", null, p, null);
 			break;
 		case ENTITY_EXPLOSION:
-			message = getmsg("creeper", null, p, null);
+			if (gk instanceof EnderCrystal) {
+				message = getmsg("endercrystal", null, p, null);
+				break;
+			}
+			if (gk instanceof Creeper) {
+				message = getmsg("creeper", null, p, null);
+				break;
+			}
+			if (gk instanceof Player) {
+				message = getmsg("endercrystal", null, p, null);
+				break;
+			}
 			break;
 		case LIGHTNING:
 			message = getmsg("lighting", null, p, null);

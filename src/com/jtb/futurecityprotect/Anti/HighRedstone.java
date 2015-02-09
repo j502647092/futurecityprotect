@@ -48,7 +48,7 @@ public class HighRedstone implements Runnable, Listener {
 				if (rp.isOp() || rp.hasPermission("fcp.ignore.highredstone")) {
 					if (!tipop.contains(rp)) {
 						rp.sendMessage(plugin.servername
-								+ "[§4红石检测§6] §c发现您放置高频红石,由于您是管理员,在服务器重启之前此高频将不会被清理,请用完后及时清理！");
+								+ "§6[§4红石检测§6] §c发现您放置高频红石,由于您是管理员,在服务器重启之前此高频将不会被清理,请用完后及时清理！");
 						tipop.add(rp);
 					}
 					continue;
@@ -56,12 +56,12 @@ public class HighRedstone implements Runnable, Listener {
 			}
 			if (tip) {
 				Bukkit.broadcastMessage(plugin.servername
-						+ "[§4红石检测§6] §c发现高频红石 §5世界：" + rw.getName()
+						+ "§6[§4红石检测§6] §c发现高频红石 §3世界：" + rw.getName()
 						+ " §d坐标： X:" + rx + " Y:" + ry + " Z:" + rz
-						+ " §a现已清理！");
+						+ " §a已清理！");
 				if (rp != null) {
 					Bukkit.broadcastMessage(plugin.servername
-							+ "[§4红石检测§6] §c高频红石数据监测 §5上述高频红石由 §6玩家：§a"
+							+ "§6[§4红石检测§6] §c高频红石数据监测 §5上述高频红石由 §6玩家：§a"
 							+ rp.getName() + "§6放置！");
 					pmap.remove(block);
 				}
@@ -83,7 +83,10 @@ public class HighRedstone implements Runnable, Listener {
 
 	@EventHandler
 	public void onRedClock(BlockRedstoneEvent event) {
-		put(event.getBlock());
+		Block rb = event.getBlock();
+		if (rb.getType() == Material.REDSTONE_WIRE) {
+			put(event.getBlock());
+		}
 	}
 
 	private void put(Block block) {

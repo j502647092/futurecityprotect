@@ -1,12 +1,14 @@
 package com.jtb.futurecityprotect;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -24,11 +26,12 @@ import com.jtb.futurecityprotect.Function.PrefixManager;
 import com.jtb.futurecityprotect.Notice.Multikills;
 import com.jtb.futurecityprotect.Notice.Tip;
 import com.jtb.futurecityprotect.Protect.Build;
+import com.jtb.futurecityprotect.Protect.ClientCheck;
 import com.jtb.futurecityprotect.Protect.Explosion;
 import com.jtb.futurecityprotect.Protect.NetherDoor;
 import com.jtb.futurecityprotect.Protect.ResFly;
 
-public class Main extends JavaPlugin {
+public class Main extends JavaPlugin{
 	public File itemfile;
 	public FileConfiguration itemConfig;
 	public File msgfile;
@@ -69,6 +72,7 @@ public class Main extends JavaPlugin {
 		boolean ClientCheck = getConfig()
 				.getBoolean("ClientCheck.Enable", true);
 		if (ClientCheck) {
+			Bukkit.getPluginManager().registerEvents(new ClientCheck(this), this);
 			getLogger().info("客户端检测模块已加载!");
 		}
 		getCommand("fcp").setExecutor(new Fcp(this));
@@ -110,7 +114,7 @@ public class Main extends JavaPlugin {
 		}
 		if (getConfig().getBoolean("PrefixManager.Enable", true)) {
 			getCommand("prefix").setExecutor(new PrefixManager(this));
-			getLogger().info("玩家连杀死亡提示已加载!");
+			getLogger().info("玩家称号管理系统已加载!");
 		}
 		if (getConfig().getBoolean("JumpBlock.Enable", true)) {
 			Bukkit.getPluginManager().registerEvents(new JumpBlock(this), this);
@@ -168,11 +172,13 @@ public class Main extends JavaPlugin {
 		sender.sendMessage(Savecfg(msgConfig, msgfile));
 	}
 
-	public void Reload(CommandSender sender) {
+	public void Reload(CommandSender sender) throws FileNotFoundException, IOException, InvalidConfigurationException {
 		saveDefaultConfig();
 		reloadConfig();
-		itemConfig = Loadcfg(itemfile);
-		msgConfig = Loadcfg(msgfile);
+		LoadConfig(itemConfig,itemfile);
+		LoadConfig(msgConfig,msgfile);
+		//itemConfig = Loadcfg(itemfile);
+		//msgConfig = Loadcfg(msgfile);
 		servername = getmessage("servername");
 		sender.sendMessage(servername + "§6[§4保护系统§6] §a配置文件已重新载入！");
 	}
@@ -180,12 +186,22 @@ public class Main extends JavaPlugin {
 	public FileConfiguration Loadcfg(File cfgfile) {
 		if (!cfgfile.exists()) {
 			saveResource(cfgfile.getName(), false);
+			
 			return YamlConfiguration.loadConfiguration(cfgfile);
 		} else {
 			return YamlConfiguration.loadConfiguration(cfgfile);
 		}
 	}
 
+	public void LoadConfig(FileConfiguration cfg ,File cfgfile) throws FileNotFoundException, IOException, InvalidConfigurationException {
+		if (!cfgfile.exists()) {
+			saveResource(cfgfile.getName(), false);
+			cfg.load(cfgfile);
+		} else {
+			cfg.load(cfgfile);
+		}
+	}
+	
 	public String Savecfg(FileConfiguration cfg, File cfgfile) {
 		try {
 			// cfg.saveToString();
@@ -249,3 +265,8 @@ public class Main extends JavaPlugin {
 	}
 
 }
+
+
+
+
+

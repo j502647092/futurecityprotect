@@ -34,9 +34,10 @@ Multikills:
 #高处摔落
   fall: '&6玩家：&a%victim%&5从高处掉落&6--&c摔死了'
 #岩浆
-  lava: '&6玩家：&a%victim%&5试图在岩浆里游泳&6--&c烧死了'
+  lava: '&6玩家：&a%victim%&5试图在岩浆里游泳&6--&c被烧死了'
 #苦力怕
-  creeper: '&6玩家：&a%victim%&5和苦力怕娘激情拥抱&6--&c炸死了'
+  creeper: '&6玩家：&a%victim%&5和苦力怕娘激情拥抱&6--&c被炸死了'
+  endercrystal: '&6玩家：&a%victim%&5摸了一下漂亮的末影水晶&6--&c被炸死了'
 #凋零状态
   witherstate: '&6玩家：&a%victim%&5与凋零骷髅亲吻&6--&c凋零了'
 #小白骷髅
@@ -47,7 +48,7 @@ Multikills:
   zombie: '&6玩家：&a%victim%&5被僵尸吃掉了脑袋&6--&c死了'
   enderman: '&6玩家：&a%victim%&5被末影人带到末地去&6--&c晕死了'
   spider: '&6玩家：&a%victim%&5被蜘蛛包成了粽子&6--&c吃掉了'
-  witherskull: '&6玩家：&a%victim%&5被凋零骷髅追杀&6--&c凋零了'
+  witherskull: '&6玩家：&a%victim%&5被凋零BOSS追杀&6--&c凋零了'
   slime: '&6玩家：&a%victim%&5被史莱姆一屁股坐下&6--&c压死了'
   lavaslime: '&6玩家：&a%victim%&5被岩浆怪黏住&6--&c玩死了'
   giant: '&6玩家：&a%victim%&5被巨人&6--&c炸死了'
@@ -56,3 +57,4 @@ Multikills:
   blaze: '&6玩家：&a%victim%&5去抢烈焰人的棒子&6--&c被烧死了'
   wither: '&6玩家：&a%victim%&5被凋零BOSS追杀&6--&c摁死了'
   ghast: '&6玩家：&a%victim%&5被恶魂疯狂的吐火球&6--&c炸死了'
+  enderdragon: '&6玩家：&a%victim%&5被被末影龙扇了一下6--&c压死了'
