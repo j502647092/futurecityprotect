@@ -23,7 +23,7 @@ import com.jtb.futurecityprotect.Main;
 
 /**
  * 
- * @author Administrator
+ * @author 蒋天蓓
  */
 public class Multikills implements Listener {
 
@@ -136,24 +136,36 @@ public class Multikills implements Listener {
 			}
 			break;
 		case PROJECTILE:
-			if (ki instanceof EntityDamageByEntityEvent) {
-				EntityDamageByEntityEvent kie = (EntityDamageByEntityEvent) ki;
-				Entity damager = kie.getDamager();
-				Projectile pro = (Projectile) damager;
-				if (pro.getShooter() instanceof Player) {
-					message = resetmsg(e, (Player) pro.getShooter(), p);
-					break;
-				}
-				if (pro.getShooter() instanceof Skeleton) {
-					message = getmsg("skeleton", null, p, null);
-					break;
-				}
-				if (damager instanceof Ghast
-						|| pro.getShooter() instanceof Ghast) {
-					message = getmsg("ghast", null, p, null);
-					break;
-				}
+			if (gk instanceof Player) {
+				message = resetmsg(e, (Player) gk, p);
+				break;
 			}
+			if (gk instanceof Skeleton) {
+				message = getmsg("skeleton", null, p, null);
+				break;
+			}
+			if (gk instanceof Ghast) {
+				message = getmsg("ghast", null, p, null);
+				break;
+			}
+			// if (ki instanceof EntityDamageByEntityEvent) {
+			// EntityDamageByEntityEvent kie = (EntityDamageByEntityEvent) ki;
+			// Entity damager = kie.getDamager();
+			// Projectile pro = (Projectile) damager;
+			// if (pro.getShooter() instanceof Player) {
+			// message = resetmsg(e, (Player) pro.getShooter(), p);
+			// break;
+			// }
+			// if (pro.getShooter() instanceof Skeleton) {
+			// message = getmsg("skeleton", null, p, null);
+			// break;
+			// }
+			// if (damager instanceof Ghast
+			// || pro.getShooter() instanceof Ghast) {
+			// message = getmsg("ghast", null, p, null);
+			// break;
+			// }
+			// }
 			break;
 		case DROWNING:
 			message = getmsg("drown", null, p, null);
@@ -181,6 +193,14 @@ public class Multikills implements Listener {
 			break;
 		case ENTITY_EXPLOSION:
 			if (gk instanceof EnderCrystal) {
+				message = getmsg("endercrystal", null, p, null);
+				break;
+			}
+			if (ki.equals(EntityType.ENDER_CRYSTAL)) {
+				message = getmsg("endercrystal", null, p, null);
+				break;
+			}
+			if(ki.getEntityType()==EntityType.ENDER_CRYSTAL){
 				message = getmsg("endercrystal", null, p, null);
 				break;
 			}
